@@ -2043,23 +2043,28 @@ class queXMLPDF extends TCPDF {
                 //save a skip
                 $this->skipToRegistry[current($c->skipTo) . $this->questionTitleSuffix] = $qtmp['title'];
               }
+              $oarrtmp = array();
               if (isset($c->contingentQuestion))
               {
                 //Need to handle contingent questions
-                $oarr = array();
-                $oarr['width'] = current($c->contingentQuestion->length);
-                $oarr['text'] = current($c->contingentQuestion->text);
+                foreach ($c->contingentQuestion as $cq)
+                {
+                  $oarr = array();
+                  $oarr['width'] = current($cq->length);
+                  $oarr['text'] = current($cq->text);
 
-                $oarr['format'] = 'text';
-                
-                if (isset($c->contingentQuestion->format))
-                  $oarr['format'] = current($c->contingentQuestion->format);
+                  $oarr['format'] = 'text';
+                  
+                  if (isset($cq->format))
+                    $oarr['format'] = current($cq->format);
 
-                if (isset($c->contingentQuestion['defaultValue'])) 
-                  $oarr['defaultvalue'] = $c->contingentQuestion['defaultValue'];
+                  if (isset($cq['defaultValue'])) 
+                    $oarr['defaultvalue'] = $cq['defaultValue'];
   
-                $oarr['varname'] = $c->contingentQuestion['varName'];
-                $cat['other'] = $oarr;
+                  $oarr['varname'] = $cq['varName'];
+                  $oarrtmp[] = $oarr;
+                }
+                $cat['other'] = $oarrtmp;
               }  
               $ctmp[] = $cat;  
             }
@@ -3517,8 +3522,11 @@ class queXMLPDF extends TCPDF {
 
       if ($other !== false)
       {
-        //Display the "other" variable
-        $this->drawOther($other);
+        //Display the "other" variables
+        foreach($other as $oth)
+		{
+			$this->drawOther($oth);
+		}
       }
   
       //only allow a page break if defined and we have more than one item already on this page
