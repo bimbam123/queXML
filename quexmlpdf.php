@@ -616,7 +616,7 @@ class queXMLPDF extends TCPDF {
   /**
    * The text to display before a skip 
    * 
-   * @var string  Defaults to "Skip to ". 
+   * @var string  Defaults to "Weiter bei ". 
    * @since 2010-09-16
    */
   protected $skipToText = "Skip to ";
@@ -1577,7 +1577,7 @@ class queXMLPDF extends TCPDF {
     {
       $stmp = array();
       $sl = $this->numberToLetter($scount);
-      $stmp['title'] = "Section " . $sl;
+      $stmp['title'] = "Teil " . $sl;
       $stmp['info'] = "";
       $stmp['text'] = "";
       $bfc = 0;  
