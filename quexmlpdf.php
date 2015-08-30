@@ -1238,14 +1238,9 @@ class queXMLPDF extends TCPDF {
     if ($this->embedFonts)
     {
       $this->setFontSubsetting(false); //we want full subsetting
-      $this->AddFont('freesans','');
-      $this->AddFont('freesans','B');
-      $this->AddFont('freesans','I');
-      $this->AddFont('freesans','BI');
       $this->AddFont('freeserif','');
       $this->AddFont('freeserif','B');
       $this->AddFont('freeserif','I');
-      $this->AddFont('freeserif','BI');
       
       $this->SetFont($this->defaultFont);
     }
