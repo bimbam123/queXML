@@ -4,8 +4,9 @@
  * Modify these two lines to point to your TCPDF installation
  * Tested with TCPDF 5.8.008 - see http://www.tcpdf.org/
  */
-require_once('/var/lib/tcpdf/config/lang/eng.php');
-require_once('/var/lib/tcpdf/tcpdf.php');
+$imagedir = "./";
+require_once(dirname(__FILE__) . './../quexs/include/limesurvey/admin/classes/tcpdf/config/lang/ger.php');
+require_once(dirname(__FILE__) . './../quexs/include/limesurvey/admin/classes/tcpdf/tcpdf.php');
 
 /**
  * A TCPDF based class to produce queXF compatible questionnaire PDF files and banding description XML from queXML
@@ -223,7 +224,7 @@ class queXMLPDF extends TCPDF {
     td.vasLabel {font-weight:bold; font-size:10pt; text-align:center;}
     td.questionHelp {font-weight:normal; text-align:right; font-style:italic; font-size:8pt;}
     td.questionHelpAfter {text-align:center; font-weight:bold; font-size:10pt;}
-    td.questionHelpBefore {text-align:center; font-weight:bold; font-size:12pt;}
+    td.questionHelpBefore {text-align:left; font-weight:bold; font-size:12pt;}
     td.responseAboveText {font-weight:normal; font-style:normal; text-align:left; font-size:12pt;} 
     td.matrixResponseGroupLabel {font-weight:normal; font-style:normal; text-align:left; font-size:12pt;}
     span.sectionTitle {font-size:18pt; font-weight:bold;} 
@@ -242,7 +243,7 @@ class queXMLPDF extends TCPDF {
    * @var string  Defaults to 10.5. 
    * @since 2011-12-20
    */
-  protected $singleResponseHorizontalHeight = 11.5;
+  protected $singleResponseHorizontalHeight = 10.5;
 
   /**
    * The maximum number of lines of text to display
@@ -325,7 +326,7 @@ class queXMLPDF extends TCPDF {
    * @var bool  Defaults to false. 
    * @since 2012-08-10
    */
-  protected $allowSplittingSingleChoiceHorizontal = false;
+  protected $allowSplittingSingleChoiceHorizontal = true;
 
   /**
    * Allows all single choice vertical arrays to be split over multiple pages/columns
@@ -352,7 +353,7 @@ class queXMLPDF extends TCPDF {
    * @var bool  Defaults to false. 
    * @since 2013-10-25
    */
-  protected $allowSplittingResponses = false;
+  protected $allowSplittingResponses = true;
 
   /**
    * Allows vertical matrix texts to be split over multiple pages/columns
@@ -361,7 +362,7 @@ class queXMLPDF extends TCPDF {
    * @var bool  Defaults to false. 
    * @since 2013-10-25
    */
-  protected $allowSplittingMatrixText = false;
+  protected $allowSplittingMatrixText = true;
 
   /**
    * Allows matrix VAS items to be split over multiple pages/columns
@@ -578,7 +579,7 @@ class queXMLPDF extends TCPDF {
    * @var bool  Defaults to array(220,220,220). 
    * @since 2010-09-15
    */
-  protected $backgroundColourQuestion = array(241);
+  protected $backgroundColourQuestion = array(255);
 
   /**
    * The bacground colour of a section
@@ -1420,7 +1421,7 @@ class queXMLPDF extends TCPDF {
       $this->Line($x + $linelength + $this->singleResponseBoxWidth, $y, $x + $linelength, $y + $this->singleResponseBoxHeight);
     }
 
-    $this->setBackground('question');    
+    $this->setBackground('section');    
     return array($x + $linelength,$y,$x + $linelength + $this->singleResponseBoxWidth, $y + $this->singleResponseBoxHeight); //return the posistion for banding
   }
 
