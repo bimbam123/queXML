@@ -3099,8 +3099,11 @@ class queXMLPDF extends TCPDF {
 
       if ($other !== false)
       {
-        //Display the "other" variable
-        $this->drawOther($other);
+        //Display the "other" variables
+        foreach($other as $oth)
+		{
+			$this->drawOther($oth);
+		}
       }
   
       //only allow a page break if defined and we have more than one item already on this page
